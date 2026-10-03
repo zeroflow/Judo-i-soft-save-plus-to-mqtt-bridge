@@ -4,3 +4,6 @@
 # In case of changes in the config file, these must be manually comitted.
 python/config_getjudo.py
 python/mytemp_getjudo.pkl
+
+# runtime state (contains token and serial number)
+python/temp_getjudo.pkl

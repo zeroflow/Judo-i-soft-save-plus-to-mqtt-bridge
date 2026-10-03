@@ -86,7 +86,10 @@ class entity():
         publish_json(client, autoconf_topic, entity_config)
 
     def parse(self, response, index, a,b):
-        val = response["data"][0]["data"][0]["data"][str(index)]["data"]
+        registers = response["data"][0]["data"][0]["data"]
+        if str(index) not in registers: #register missing in response (e.g. not supported by device) -> keep last value
+            return
+        val = registers[str(index)]["data"]
         if val != "":
             self.value = int.from_bytes(bytes.fromhex(val[a:b]), byteorder='little')
 
@@ -530,10 +533,10 @@ def main():
                 timestamp = timestamp[:-7] + ": "
 
                 if error_response_json["data"][0]["type"] == "w":
-                    error_message = timestamp + messages_getjudo.warnings[error_response_json["data"][0]["error"]]
+                    error_message = timestamp + messages_getjudo.warnings[str(error_response_json["data"][0]["error"])]
                     notify.publish(error_message, 1)
                 elif error_response_json["data"][0]["type"] == "e":
-                    error_message = timestamp + messages_getjudo.errors[error_response_json["data"][0]["error"]]
+                    error_message = timestamp + messages_getjudo.errors[str(error_response_json["data"][0]["error"])]
                     notify.publish(error_message, 1)
     except Exception as e:
         notify.publish([messages_getjudo.debug[30].format(sys.exc_info()[-1].tb_lineno),e], 3)
