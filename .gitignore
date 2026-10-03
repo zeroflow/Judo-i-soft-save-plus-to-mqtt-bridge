@@ -7,3 +7,11 @@ python/mytemp_getjudo.pkl
 
 # runtime state (contains token and serial number)
 python/temp_getjudo.pkl
+
+# docker deployment: credentials and runtime state
+.env
+data/
+
+# python bytecode (may contain compiled credentials)
+__pycache__/
+*.pyc

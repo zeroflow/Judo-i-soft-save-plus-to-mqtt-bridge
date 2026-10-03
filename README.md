@@ -16,7 +16,17 @@ General settings must be made in the config file.
  - Furthermore there are the MQTT broker settings. The IP of the MQTT broker must be specified here, as well as the access data to the broker.
 - General settings like location and name should also be defined. This results in the MQTT topic
 - In addition, the language can be set between German and English, as well as the MQTT debug level. As default user the value "1" or "2" is recommended.
-- At last you have to set in the script in which environment it should run, see following instructions, there are two ways to run this script:
+- At last you have to set in the script in which environment it should run, see following instructions, there are three ways to run this script:
+
+All settings can alternatively be passed as environment variables with the same name (e.g. `JUDO_PASSWORD`, `BROKER`). They are used when no `config_getjudo.py` exists.
+
+### Running with Docker Compose:
+```
+cp .env.example .env    # fill in myjudo.eu account, broker, LOCATION/NAME
+docker compose up -d --build
+docker logs -f getjudo
+```
+The runtime state (token, counters) is stored in `./data/temp_getjudo.pkl`.
 
 ### Running on a generic Linux platform:
 The requirement is of course that a Python environment is installed on the Linux:

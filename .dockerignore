@@ -1,0 +1,4 @@
+*
+!requirements.txt
+!python/*.py
+python/config_getjudo.py

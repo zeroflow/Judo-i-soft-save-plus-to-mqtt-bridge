@@ -6,7 +6,10 @@ import time
 import gc
 import os
 import sys
-import config_getjudo
+try:
+    import config_getjudo
+except ModuleNotFoundError:  #no local config file -> settings from environment variables
+    import config_getjudo_default as config_getjudo
 import messages_getjudo
 import hashlib
 import math

@@ -1,0 +1,9 @@
+services:
+  getjudo:
+    build: .
+    image: getjudo:latest
+    container_name: getjudo
+    env_file: .env
+    volumes:
+      - ./data:/data    # temp_getjudo.pkl: token, serial number, counters
+    restart: unless-stopped

@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-import config_getjudo
+try:
+    import config_getjudo
+except ModuleNotFoundError:  #no local config file -> settings from environment variables
+    import config_getjudo_default as config_getjudo
 
 #DE
 if config_getjudo.LANGUAGE == "DE":
